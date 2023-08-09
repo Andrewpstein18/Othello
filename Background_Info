@@ -1,0 +1,143 @@
+Here is the ReadMe that was included in the final project homework:
+1. 
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+CIS 120 Game Project README
+PennKey: _______
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+===================
+=: Core Concepts :=
+===================
+
+- List the four core concepts, the features they implement, and why each feature
+  is an appropriate use of the concept. Incorporate the feedback you got after
+  submitting your proposal.
+
+  1. File I/O:
+          - After every move, the game saves to a file on the backend
+          - The user can then load this file (if they know the name of the file) and restart
+                from the exact same state that they last left off.
+          - File I/O saving to a CSV is a great way to save information that can later
+                be read using an iterator to update the game.
+  2. 2D array:
+          - The state of the pieces are saved into an 8x8 2d array that represents the game baord
+                    + a 1 is a black piece
+                    + a 2 is a white piece
+                    + a 0 is a blank space
+          - Throughout the code, I iterate through this array to do the following:
+               - count the total of each player
+               - draw the black and white filledOvals onto the board
+               - check if the new click is a valid move
+          - 2D arrays are a great way to save grid information because you can easily traverse
+                through them and gather the information. It is a very natural way to represent
+                a chess board. They also have a standard size that cannot be altered, and the board
+                is auto initialized to be all blank with 0 (since i made it save type int). I used
+                type int because of this reason, as well as because, being a primitive type, I would
+                not have to use up more space on the heap and worry about overriding equals and compare To.
+                0,1,2 are easy ways to kep track of different states in the board.
+  3. Collections:
+           - I used collections to store the moves that were played on the board,
+                 which is then displayed on the side of hte game.
+           - I used a LinkedList because it would easily allow me to add information to the collection.
+           Order did matter (to keep track of the move number) and LinkedList is the best way to keep track
+           of ordered information.
+           - After every call of the playTurn method that is valid, I add that Move to the collection.
+                    I then iterate through this collection and display it onto the screen with the move
+                    number that corresponds to it.
+           - I created a class Move to easily access the x and y of every move and altered the toString method
+                    to the format that I would like it to be displayed on the screen.
+           - This was a good data structure to do this because it has no maximum size, so I can add each new
+                    move without worrying about errors. Also, I can use for each loops to clean up my code.
+                    Lastly, the add method makes it eassy to add moves in order and then print to the screen.
+  4. JUnit Testing:
+           - I created each method to perform one individual action to be able to test it with Junit testing.
+           I then created a OthelloTest class to test each method and their edge cases.
+           - JUnit testing is a clean awy to test each individual method for them working correctly and therefore
+                that the program as a whole works.
+
+=========================
+=: Your Implementation :=
+=========================
+
+- Provide an overview of each of the classes in your code, and what their
+  function is in the overall game.
+        1. FileLineIterator -> Iterates over the saved game file to be able to read each move in the saved state
+                I then play these moves to be able to reload the game to where it was saved.
+        2. GameBoard -> Class that represents the board of the game. It has a paintComponent and preffered size for the
+                JavaSwift code. It draws the lines of the board and sets the colors to be accurate to the real game.
+                It has methods to update the state behind the graphics each time the screen is clicked. It is the backend
+                of what the user sees on the screen.
+        3. Move -> A created class that is used to save each playTurn call that is valid to be displayed on the screen.
+                    It is a simple way to save an x and y and then call the toString to be the format I want.
+        4. Othello -> The backend that controlls the game state. It writes valid moves to the file and alters all of the state
+                    weith each valid move. Alters the counts of each piece, flips pieces in the board, and adds moves to the
+                    display collection. This is the object that handles true backend code of the game that handles the state.
+        5. OthelloTest -> This is where I wrote all of my tests for the code.
+        6. RunOthello -> This is where I wrote the code that handles what the user sees. I instantiate a type GameBoard and
+                    create buttons that display, alter the state. The buttons load games from a file, reset, and display instructions.
+                    I also created the left hand panel to display previous moves as well as the label on the bottom of the screen
+                    that tells who has the current turn.
+
+- Were there any significant stumbling blocks while you were implementing your
+  game (related to your design, or otherwise)?
+        - I tried to implement undo but I could not figure out how to completely remove a line from a file
+        once it had be written. I tried ovewriting an empty string but the file still held that that line
+        had been used and I ran into all sorts of errors that broke the invariants.
+
+
+- Evaluate your design. Is there a good separation of functionality? How well is
+  private state encapsulated? What would you refactor, if given the chance?
+
+        - I think its a pretty solid design. private state is well encapsulated and the helper functions
+        are well designed and clean. I would refactor the design of what is shown to the user to be cleaner.
+
+
+
+========================
+=: External Resources :=
+========================
+
+- Cite any external resources (images, tutorials, etc.) that you may have used 
+  while implementing your game.
+      - Instructions: https://www.ultraboardgames.com/othello/game-rules.php
+
+2.
+### CIS 120 Homework 9: Build Your Own Game
+
+## Homework Instructions
+
+Please follow the instructions available here:
+
+*   [Homework Description](http://www.cis.upenn.edu/~cis120/current/hw/hw09)
+
+## Running JUnit tests in Codio
+
+*   First “Compile” to update the code generated by your program.
+
+*   Select "Test Project" from same menu.
+
+## Running your Project
+
+Note that the Codio menu now provides two modes of running your project:
+
+*   First "Compile" to update the code generated by your program.
+
+*   Then use the "Run Game" menu. This will start your application.
+
+*   To view the running application, in the menu bar to the right of the
+    previous item, select View Game. Assuming that a program is running, it will
+    show the running application in a new window or tab.
+
+## Zipping and Submitting
+
+Once you are finished, use the "Zip" menu item to create a file called
+"hw09-submit(-time).zip" and upload it here:
+
+[Homework Submission Site](https://www.cis.upenn.edu/~cis120/current/submitredirect)
+
+## Codio Documentation
+
+Codio documentation can be found here:
+
+[CIS 120 Codio Documentation](https://www.seas.upenn.edu/~cis120/current/codio/)
+
